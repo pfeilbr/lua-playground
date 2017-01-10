@@ -53,18 +53,18 @@ l('ten = ' .. ten)
 do
     local a, b, c = 1, 2, 3
     l('a = ' .. a .. ', b = ' .. b .. ', c = ' .. c)
-    
+
     local foo = function(a,b)
         return a+1, b+1
     end
-    
+
     local a1, b1 = foo(2,3)
     l('a1 = ' .. a1 .. ', b1 = ' .. b1)
 end
 
 -- loops
 for i=1,10 do
-   l('i = ' .. i) 
+   l('i = ' .. i)
 end
 
 -- blocks
@@ -139,9 +139,10 @@ end
 
 
 arr = {1, 3, 2}
-print( 'elements in  arr = ' .. tostring(table.getn(arr)) )
+print('length of arr: ' .. tostring(#arr))
+print( 'elements in  arr = ' .. tostring(#arr) )
 table.sort(arr)
-print( tostring( arr[table.getn(arr)] ) )
+print( tostring( arr[#arr] ) )
 
 print('arr[1] = ' .. tostring(arr[1]) )
 
