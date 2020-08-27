@@ -40,7 +40,7 @@ for i,name in ipairs(names) do
     l("i = " .. i .. ", name = " .. name)
 end
 
-local person = {name='brian', age=33}
+local person = {name='brian', age=33, gender='male'}
 for key,value in pairs(person) do
     l('key = ' .. key .. ', value = ' .. value)
 end
@@ -122,46 +122,46 @@ end
 local fields = {['TelecomType'] = true, ['TelecomLovID'] = true}
 
 if fields['TelecomLovIDs'] then
-    print("found")
+    l("found")
 else
-    print("not found")
+    l("not found")
 end
 
 for key,value in pairs(fields) do
-    print(tostring(fields[key]))
+    l(tostring(fields[key]))
 end
 
 UIHelper = {}
 
 function UIHelper:deleteEmptyRows()
-    print('UIHelper:deleteEmptyRows called')
+    l('UIHelper:deleteEmptyRows called')
 end
 
 
 arr = {1, 3, 2}
-print('length of arr: ' .. tostring(#arr))
-print( 'elements in  arr = ' .. tostring(#arr) )
+l('length of arr: ' .. tostring(#arr))
+l( 'elements in  arr = ' .. tostring(#arr) )
 table.sort(arr)
-print( tostring( arr[#arr] ) )
+l( tostring( arr[#arr] ) )
 
-print('arr[1] = ' .. tostring(arr[1]) )
+l('arr[1] = ' .. tostring(arr[1]) )
 
 if _G['Account Dropdown List'] then
-    print('found')
+    l('found')
 else
-    print('not found')
+    l('not found')
 end
 
 _G['Account Dropdown List'] = 'here now'
 
 if _G['Account Dropdown List'] then
-    print('found')
+    l('found')
 else
-    print('not found')
+    l('not found')
 end
 
 _G['Account Dropdown List Callback'] = function()
-    print('callback here')
+    l('callback here')
 end
 
 _G['Account Dropdown List Callback']()
@@ -176,15 +176,53 @@ end
 
 local v = nil
 if not v then
-    print('v is nil')
+    l('v is nil')
 end
 local qw = nil
 if not qw  then
-    print('no qw here')
+    l('no qw here')
 end
 
 local name = 'brian'
 
 if not (name == 'lo') then
-    print('lolo')
+    l('lolo')
 end
+
+-- functions in tables
+
+local fns = {}
+
+function fns.foo()
+  return 'fns.foo'
+end
+
+function fns.bar()
+  return 'fns.bar'
+end
+
+l(fns.foo())
+l(fns.bar())
+
+for name, fn in next, fns do
+  l('name=' .. name .. ',fn=' .. fn())
+end
+
+-- dynamic code execution / evaluation
+local code = '1+2+3'
+local res = load('return ' .. code)()
+l('res=' .. res)
+
+-- variable function arguments
+function args(...)
+  -- number of args
+  local args_count = select('#', ...)
+  l('args_count=' .. args_count)
+
+  local first_arg = select(1, ...)
+  local second_arg = select(2, ...)
+
+  l('first_arg=' .. first_arg)
+  l('second_arg=' .. second_arg)
+end
+l(args('apples','milk','bread'))
